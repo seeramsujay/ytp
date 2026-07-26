@@ -1,0 +1,39 @@
+# Media Downloads
+*.mp4
+*.mkv
+*.webm
+*.flv
+*.avi
+*.mp3
+*.m4a
+*.opus
+*.wav
+*.aac
+*.part
+*.ytdl
+
+# Compressed Archives
+*.zip
+*.tar
+*.gz
+*.tar.gz
+*.tgz
+*.7z
+*.rar
+*.bz2
+*.xz
+
+# Python / Environment & Package Managers
+.venv/
+venv/
+ENV/
+env/
+uv.lock
+
+# Operating System & Editor Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/

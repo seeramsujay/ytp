@@ -1,0 +1,132 @@
+# ytp — YouTube Playlist Downloader CLI
+
+`ytp` is a lightweight, user-friendly wrapper script for [`yt-dlp`](https://github.com/yt-dlp/yt-dlp) designed to simplify downloading YouTube playlists and videos by index range, shortcut aliases, or custom format codes.
+
+---
+
+## ✨ Features
+
+- **Playlist Alias Saving**: Save long playlist URLs under custom shortcut names (`ytp --save <url> <name>`) so you never have to search for or copy-paste playlist links again.
+- **Format Inspection**: Quickly list available video and audio format codes for any playlist or video using `ytp -F <url_or_alias>`.
+- **Flexible Index Ranges**: Download single items (`7`), sub-ranges (`3-6`), custom lists (`1,3,5`), or entire playlists (`all` or `1-`).
+- **Clean Naming Convention**: Automatically formats downloaded files with padded index numbers (e.g., `01 - Video Title.mp4`).
+- **Built-in Help Screen**: Interactive colored help page available via `ytp --help` or `ytp -h`.
+
+---
+
+## 🛠️ Prerequisites
+
+Make sure you have [`yt-dlp`](https://github.com/yt-dlp/yt-dlp) installed and available in your `PATH`:
+
+```bash
+# Install via pip
+pip install yt-dlp
+
+# Or install via package manager (Ubuntu/Debian/Linux Mint)
+sudo apt update && sudo apt install yt-dlp
+```
+
+---
+
+## 🚀 Quick Start & Installation
+
+1. **Clone or navigate to the project directory:**
+   ```bash
+   git clone https://github.com/your-username/ytp.git
+   cd ytp
+   ```
+
+2. **Make the script executable:**
+   ```bash
+   chmod +x ytp
+   ```
+
+3. *(Optional)* **Add `ytp` to your system PATH for global access:**
+   ```bash
+   mkdir -p ~/.local/bin
+   ln -s "$(pwd)/ytp" ~/.local/bin/ytp
+   ```
+   *(Ensure `~/.local/bin` is in your `$PATH`)*
+
+---
+
+## 📖 Usage Syntax
+
+```bash
+ytp <url_or_alias> [range] [format]
+```
+
+### Options & Subcommands
+
+| Command / Flag | Description |
+| :--- | :--- |
+| `ytp <url_or_alias> [range] [format]` | Download playlist items by range and optional format code. |
+| `ytp --save <link> <alias_name>` | Save a playlist URL under a shortcut alias name. |
+| `ytp --list-saved` | Display all saved playlist aliases and their stored URLs. |
+| `ytp --remove <alias_name>` | Delete a saved playlist alias. |
+| `ytp -F` \| `ytp --list-formats <url_or_alias>` | List all available format codes for the target playlist/video. |
+| `ytp -h` \| `ytp --help` | Show the interactive help page. |
+| `ytp -v` \| `ytp --version` | Display version information. |
+
+---
+
+## 💡 Examples
+
+### 1. Save a Playlist for Easy Access
+
+Instead of finding and pasting the URL every time:
+```bash
+ytp --save "https://www.youtube.com/playlist?list=PLabc123456789" mysongs
+```
+
+List your saved playlists anytime:
+```bash
+ytp --list-saved
+```
+
+### 2. Download Items Using a Saved Alias
+
+Download items 1 through 5 from your saved playlist:
+```bash
+ytp mysongs 1-5
+```
+
+Download a single item (e.g., item #7):
+```bash
+ytp mysongs 7
+```
+
+Download all remaining items from item #5 onwards:
+```bash
+ytp mysongs 5-
+```
+
+### 3. List Available Format Codes
+
+Inspect available qualities and codecs (e.g. 720p, 1080p, audio-only):
+```bash
+ytp -F mysongs
+```
+or with a direct URL:
+```bash
+ytp -F "https://www.youtube.com/playlist?list=PLabc123456789"
+```
+
+### 4. Download with a Specific Format Code
+
+Pass a format code (e.g. `18` for 360p MP4 or `bestvideo+bestaudio/best`):
+```bash
+ytp mysongs 1-5 18
+```
+
+---
+
+## 📁 Storage Location
+
+Saved playlist aliases are stored in `$XDG_CONFIG_HOME/ytp/playlists` (defaults to `~/.config/ytp/playlists`).
+
+---
+
+## 📄 License
+
+Distributed under the MIT License. Feel free to modify and use!
