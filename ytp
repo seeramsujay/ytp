@@ -1,0 +1,31 @@
+#!/bin/bash
+# ytp.sh — Simplify yt-dlp playlist downloads by index range or number
+
+# Usage:
+#   ./ytp.sh <playlist_url> <item_range_or_number>
+# Example:
+#   ./ytp.sh "https://www.youtube.com/playlist?list=PLabc123" 3-6
+#   ./ytp.sh "https://www.youtube.com/playlist?list=PLabc123" 7
+
+# Check arguments
+if [ "$#" -lt 2 ]; then
+    echo "Usage: $0 <playlist_url> <playlist_items>"
+    echo "Example: $0 'https://youtube.com/playlist?list=...' 3-6"
+    exit 1
+fi
+
+PLAYLIST_URL="$1"
+ITEM_RANGE="$2"
+
+# Download format: 18 = 360p mp4 (you can change this to your preferred)
+FORMAT="$3"
+
+# Output pattern with two-digit index: 01 - Video Title.mp4
+OUTPUT="%(playlist_index)02d - %(title)s.%(ext)s"
+
+echo "Downloading playlist items $ITEM_RANGE from:"
+echo "$PLAYLIST_URL"
+echo "-------------------------------------------"
+
+# Run yt-dlp
+yt-dlp -o "$OUTPUT" -f "$FORMAT" --playlist-items "$ITEM_RANGE" "$PLAYLIST_URL"
