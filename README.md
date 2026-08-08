@@ -6,6 +6,7 @@
 
 ## ✨ Features
 
+- **Stream-friendly `aria2c` Integration**: Automatically leverages `aria2c` with `--no-part` so it pre-allocates the complete target media file directly (with a temporary `.aria2` control file), allowing media players to stream and play the file while downloading.
 - **Playlist Alias Saving**: Save long playlist URLs under custom shortcut names (`ytp --save <url> <name>`) so you never have to search for or copy-paste playlist links again.
 - **Video Title Listing**: Quickly list video titles in a playlist without downloading using `ytp --list-videos <url_or_alias> [range]`.
 - **Format Inspection**: Quickly list available video and audio format codes for any playlist or video using `ytp -F <url_or_alias>`.
@@ -25,6 +26,14 @@ pip install yt-dlp
 
 # Or install via package manager (Ubuntu/Debian/Linux Mint)
 sudo apt update && sudo apt install yt-dlp
+```
+
+### ⚡ Recommended (For Stream-like Playback While Downloading)
+
+Install `aria2` to enable sequential streaming playback while downloading:
+
+```bash
+sudo apt install aria2
 ```
 
 ---
@@ -61,7 +70,9 @@ ytp <url_or_alias> [range] [format]
 
 | Command / Flag | Description |
 | :--- | :--- |
-| `ytp <url_or_alias> [range] [format]` | Download playlist items by range and optional format code. |
+| `ytp <url_or_alias> [range] [format]` | Download playlist items (automatically uses `aria2c` if available). |
+| `ytp --no-aria2` \| `ytp --native` | Bypass `aria2c` and use `yt-dlp` native downloader. |
+| `ytp --aria2` | Force using `aria2c` downloader (exits with error if missing). |
 | `ytp --save <link> <alias_name>` | Save a playlist URL under a shortcut alias name. |
 | `ytp --list-saved` | Display all saved playlist aliases and their stored URLs. |
 | `ytp --remove <alias_name>` | Delete a saved playlist alias. |
@@ -88,14 +99,14 @@ ytp --list-saved
 
 ### 2. Download Items Using a Saved Alias
 
-Download items 1 through 5 from your saved playlist:
+Download items 1 through 5 from your saved playlist (accelerated with `aria2c` if present):
 ```bash
 ytp mysongs 1-5
 ```
 
-Download a single item (e.g., item #7):
+Download a single item using the native downloader explicitly:
 ```bash
-ytp mysongs 7
+ytp --no-aria2 mysongs 7
 ```
 
 Download all remaining items from item #5 onwards:
@@ -143,3 +154,4 @@ Saved playlist aliases are stored in `$XDG_CONFIG_HOME/ytp/playlists` (defaults 
 ## 📄 License
 
 Distributed under the MIT License. Feel free to modify and use!
+
