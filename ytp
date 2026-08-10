@@ -224,7 +224,7 @@ list_videos() {
     echo -e "${BLUE}${resolved_url}${RESET}"
     echo -e "--------------------------------------------------------"
 
-    yt-dlp --flat-playlist --playlist-items "$item_range" --print title "$resolved_url"
+    yt-dlp --flat-playlist --playlist-items "$item_range" --print "%(playlist_index|1)s - %(title)s" "$resolved_url" | grep -E -v '^[0-9]+ - NA$'
 }
 
 # Main script logic
