@@ -18,15 +18,18 @@
 
 ## 🛠️ Prerequisites
 
-Make sure you have [`yt-dlp`](https://github.com/yt-dlp/yt-dlp) installed and available in your `PATH`:
+Make sure you have [`yt-dlp`](https://github.com/yt-dlp/yt-dlp) installed and available in your `PATH` or environment:
 
 ```bash
 # Install via pip
-pip install yt-dlp
+pip install -r requirements.txt
+# or: pip install yt-dlp
 
 # Or install via package manager (Ubuntu/Debian/Linux Mint)
 sudo apt update && sudo apt install yt-dlp
 ```
+
+> **Note**: `ytp` automatically detects and uses `uv run yt-dlp` if `uv` is available, seamlessly passing `--cookies-from-browser=chrome` and `--remote-components ejs:github` to handle modern YouTube JS challenges and bot restrictions.
 
 ### ⚡ Recommended (For Stream-like Playback While Downloading)
 
@@ -70,9 +73,11 @@ ytp <url_or_alias> [range] [format]
 
 | Command / Flag | Description |
 | :--- | :--- |
-| `ytp <url_or_alias> [range] [format]` | Download playlist items (automatically uses `aria2c` if available). |
+| `ytp <url_or_alias> [range] [format]` | Download playlist items (default format: `18`, automatically uses `aria2c` if available). |
 | `ytp --no-aria2` \| `ytp --native` | Bypass `aria2c` and use `yt-dlp` native downloader. |
 | `ytp --aria2` | Force using `aria2c` downloader (exits with error if missing). |
+| `ytp --cookies <browser>` | Specify browser for cookies (e.g. `--cookies chrome` or `--cookies firefox`). |
+| `ytp --no-cookies` | Disable browser cookie extraction. |
 | `ytp --save <link> <alias_name>` | Save a playlist URL under a shortcut alias name. |
 | `ytp --list-saved` | Display all saved playlist aliases and their stored URLs. |
 | `ytp --remove <alias_name>` | Delete a saved playlist alias. |
@@ -99,7 +104,7 @@ ytp --list-saved
 
 ### 2. Download Items Using a Saved Alias
 
-Download items 1 through 5 from your saved playlist (accelerated with `aria2c` if present):
+Download items 1 through 5 from your saved playlist (default format `18` / 360p MP4, accelerated with `aria2c` if present):
 ```bash
 ytp mysongs 1-5
 ```
@@ -136,11 +141,11 @@ or with a direct URL:
 ytp -F "https://www.youtube.com/playlist?list=PLabc123456789"
 ```
 
-### 5. Download with a Specific Format Code
+### 5. Download with a Custom Format Code
 
-Pass a format code (e.g. `18` for 360p MP4 or `bestvideo+bestaudio/best`):
+Pass a custom format code (e.g. `22` for 720p MP4 or `bestvideo+bestaudio/best`):
 ```bash
-ytp mysongs 1-5 18
+ytp mysongs 1-5 22
 ```
 
 ---
