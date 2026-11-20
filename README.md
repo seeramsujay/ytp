@@ -1,4 +1,22 @@
-# ytp — YouTube Playlist Downloader CLI
+<div align="center">
+
+<img src="assets/logo.svg" alt="ytp Logo" width="160" />
+
+# ytp
+### High-Efficiency YouTube Playlist & Video Downloader CLI
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Engine: yt-dlp](https://img.shields.io/badge/Engine-yt--dlp-red.svg)](https://github.com/yt-dlp/yt-dlp)
+[![Accelerator: aria2c](https://img.shields.io/badge/Accelerator-aria2c%20Stream--Ready-orange.svg)](https://aria2.github.io)
+[![Shell: Bash / Python](https://img.shields.io/badge/CLI-POSIX%20Compliant-success.svg)](#)
+
+<p align="center">
+  <b>A lightweight, user-friendly wrapper for yt-dlp with aria2c streaming integration, playlist alias persistence, video title previewing, and flexible index range downloads.</b>
+</p>
+
+</div>
+
+---
 
 `ytp` is a lightweight, user-friendly wrapper script for [`yt-dlp`](https://github.com/yt-dlp/yt-dlp) designed to simplify downloading YouTube playlists and videos by index range, shortcut aliases, or custom format codes.
 
